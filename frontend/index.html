@@ -1,0 +1,112 @@
+<!-- This will be the frontend from the page, create a button that sends requests to the reverse proxy -->
+<!-- The reverse proxy will then send the request to the backend -->
+<!-- The backend will then send the response back to the reverse proxy -->
+<!-- The reverse proxy will then send the response back to the frontend -->
+<!-- The frontend will then display the response -->
+
+<!-- Path: frontend/index.html -->
+<!-- The proxy is on localhost:5000 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Frontend</title>
+</head>
+    <body style="background-color: #3C2A21;">
+        <div>
+            <pre>
+   ▄▀▀▀▀▄  ▄▀▀█▄▄▄▄  ▄▀▀▄ ▀▄  ▄▀▀█▄▄       ▄▀▀▄▀▀▀▄  ▄▀▀█▄▄▄▄  ▄▀▀▀▀▄   ▄▀▀▄ ▄▀▀▄  ▄▀▀█▄▄▄▄  ▄▀▀▀▀▄  ▄▀▀▀█▀▀▄      ▄▀▀▀█▀▀▄  ▄▀▀▀▀▄       ▄▀▀▄▀▀▀▄  ▄▀▀█▄▄▄▄  ▄▀▀▄ ▄▀▀▄  ▄▀▀█▄▄▄▄  ▄▀▀▄▀▀▀▄  ▄▀▀▀▀▄  ▄▀▀█▄▄▄▄      ▄▀▀▄▀▀▀▄  ▄▀▀▄▀▀▀▄  ▄▀▀▀▀▄   ▄▀▀▄  ▄▀▄  ▄▀▀▄ ▀▀▄ 
+   █ █   ▐ ▐  ▄▀   ▐ █  █ █ █ █ ▄▀   █     █   █   █ ▐  ▄▀   ▐ █      █ █   █    █ ▐  ▄▀   ▐ █ █   ▐ █    █  ▐     █    █  ▐ █      █     █   █   █ ▐  ▄▀   ▐ █   █    █ ▐  ▄▀   ▐ █   █   █ █ █   ▐ ▐  ▄▀   ▐     █   █   █ █   █   █ █      █ █    █   █ █   ▀▄ ▄▀ 
+      ▀▄     █▄▄▄▄▄  ▐  █  ▀█ ▐ █    █     ▐  █▀▀█▀    █▄▄▄▄▄  █      █ ▐  █    █    █▄▄▄▄▄     ▀▄   ▐   █         ▐   █     █      █     ▐  █▀▀█▀    █▄▄▄▄▄  ▐  █    █    █▄▄▄▄▄  ▐  █▀▀█▀     ▀▄     █▄▄▄▄▄      ▐  █▀▀▀▀  ▐  █▀▀█▀  █      █ ▐     ▀▄▀  ▐     █   
+   ▀▄   █    █    ▌    █   █    █    █      ▄▀    █    █    ▌   ▀▄▄▄▄▀▄   █    █     █    ▌  ▀▄   █     █             █      ▀▄    ▄▀      ▄▀    █    █    ▌     █   ▄▀    █    ▌   ▄▀    █  ▀▄   █    █    ▌         █       ▄▀    █  ▀▄    ▄▀      ▄▀ █        █   
+    █▀▀▀    ▄▀▄▄▄▄   ▄▀   █    ▄▀▄▄▄▄▀     █     █    ▄▀▄▄▄▄           █   ▀▄▄▄▄▀   ▄▀▄▄▄▄    █▀▀▀    ▄▀            ▄▀         ▀▀▀▀       █     █    ▄▀▄▄▄▄       ▀▄▀     ▄▀▄▄▄▄   █     █    █▀▀▀    ▄▀▄▄▄▄        ▄▀       █     █     ▀▀▀▀       █  ▄▀      ▄▀    
+    ▐       █    ▐   █    ▐   █     ▐      ▐     ▐    █    ▐           ▐            █    ▐    ▐      █             █                      ▐     ▐    █    ▐               █    ▐   ▐     ▐    ▐       █    ▐       █         ▐     ▐              ▄▀  ▄▀       █     
+            ▐        ▐        ▐                       ▐                             ▐                ▐             ▐                                 ▐                    ▐                           ▐            ▐                             █    ▐        ▐     
+   
+   
+            </pre>
+        </div>
+    <div style="background-color: #1A120B;">
+
+        <button onclick="sendRequest()">Send GET Request</button>
+        <!-- Send a GET request to the reverse proxy -->
+        <script> 
+            function sendRequest() {
+                fetch('http://localhost:5000/', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => console.log(data))
+            }
+        </script>
+        
+        <br>
+
+        <button onclick="sendPostRequest()">Send POST Request</button>
+        <!-- Send a POST request to the reverse proxy -->
+        <script> 
+            function sendPostRequest() {
+                fetch('http://localhost:5000/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'John Doe',
+                        email: 'john@doe.com',
+                    })
+                })
+                .then(response => response.json())
+                .then(data => console.log(data))
+            }
+        </script>
+
+        <br>
+
+        <button onclick="sendPutRequest()">Send PUT Request</button>
+        <!-- Send a PUT request to the reverse proxy -->
+        <script> 
+            function sendPutRequest() {
+                fetch('http://localhost:5000/', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'John Doe',
+                        email: 'john@doe.com',
+                    })
+                })
+                .then(response => response.json())
+                .then(data => console.log(data))
+            }
+        </script>
+
+        <br>
+
+        <button onclick="sendDeleteRequest()">Send DELETE Request</button>
+        <!-- Send a DELETE request to the reverse proxy -->
+        <script> 
+            function sendDeleteRequest() {
+                fetch('http://localhost:5000/', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'John Doe',
+                        email: 'john@doe.com',
+                    })
+                })
+                .then(response => response.json())
+                .then(data => console.log(data))
+            }
+        </script>
+
+    </div>
+</body>
+</html>
